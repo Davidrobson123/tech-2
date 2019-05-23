@@ -7,8 +7,10 @@ export default class Main extends Component {
     super(props);
 
     this.state = {
-      products: null,
+      products: [],
     };
+
+    this.createDeals = this.createDeals.bind(this);
   }
 
   componentDidMount() {
@@ -28,13 +30,23 @@ export default class Main extends Component {
       });
   }
 
+  createDeals() {
+    return this.state.products.map(this.generateOffer)
+  }
+
+  generateOffer = deal => {
+    return (
+    <div>{deal.brand}</div>
+    );
+  }
+
   render() {
 
     console.log(this.state.products)
 
     return (
       <div className="main">
-
+        {this.createDeals()}
       </div>
     )
   };

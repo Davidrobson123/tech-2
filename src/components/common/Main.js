@@ -8,10 +8,12 @@ export default class Main extends Component {
 
     this.state = {
       products: [],
-      featuredProduct: ''
+      featuredProduct: '',
+      filteredProducts: []
     };
 
     this.createDeals = this.createDeals.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -37,41 +39,69 @@ export default class Main extends Component {
           return responseJson;
         });
         this.setState({
-          products: responseJson.Items
+          products: responseJson.Items,
+          filteredProducts: responseJson.Items
         });
       });
   }
 
   createDeals() {
-    return this.state.products.map(this.generateOffer)
+    return this.state.filteredProducts.map(this.generateOffer)
+  }
+
+  filterProducts = (productFilter) => {
+
+      let filteredProducts = this.state.products
+      filteredProducts = filteredProducts.filter((product) => {
+          let productName = product.name.toLowerCase()
+          return productName.indexOf(
+                  productFilter.toLowerCase()) !== -1
+      })
+      this.setState({
+          filteredProducts: filteredProducts
+      })
+  }
+
+  handleChange = (e) => {
+      this.filterProducts(e.target.value)
   }
 
   generateOffer = deal => {
-    return (
-    <div>{deal.brand}</div>
-    );
+    if(deal['size']['small'] > 0 || deal['size']['medium'] > 0 || deal['size']['large'] > 0 ) {
+        return (
+            <div className="product">
+              <div className="image"></div>
+              <div className="product-name">{deal.name}</div>
+              <div className="product-brand">{deal.brand}</div>
+              <select>
+                <option disabled selected>Size</option>
+              </select>
+              <div>Description</div>
+            </div>
+        );
+     }
   }
 
   render() {
 
-    console.log(this.state)
+    let featured = this.state.featuredProduct;
 
     return (
       <div className="main">
+        <input type="text" id="filter"
+               onChange={this.handleChange}/>
         {/*{this.createDeals()}*/}
         <div className="product">
           <div className="image"></div>
-          <div className="product-name">Brown Jacket</div>
-          <div className="product-brand">Adidas</div>
+          <div className="product-name">{featured.name}</div>
+          <div className="product-brand">{featured.brand}</div>
           <select>
             <option disabled selected>Size</option>
           </select>
           <div>Description</div>
         </div>
 
-        <div className="product">
-          <div className="image"></div>
-        </div>
+         {this.createDeals()}
       </div>
     )
   };

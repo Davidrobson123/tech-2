@@ -5,7 +5,7 @@ import '../../App.scss';
 function Header() {
   return (
     <header className="App-header">
-      <div className="main-header"><span>The</span><img src={logo} className="App-logo"/><span> Shop</span></div>
+      <div className="main-header"><span>The</span><img src={logo} className="App-logo" alt="logo"/><span> Shop</span></div>
       <div className="menu">
         <div className="topnav" id="myTopnav">
           <a className="active">Male</a>

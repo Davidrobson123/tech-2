@@ -8,6 +8,7 @@ export default class Main extends Component {
 
     this.state = {
       products: [],
+      featuredProduct: ''
     };
 
     this.createDeals = this.createDeals.bind(this);
@@ -24,6 +25,17 @@ export default class Main extends Component {
       }
     }).then(response => response.json())
       .then(responseJson => {
+        let me = this;
+        responseJson.Items.map(function(item, i) {
+          if(item.productid === '0m8hjmd721') {
+            me.setState({
+                featuredProduct: item
+            });
+
+            responseJson.Items = responseJson.Items.filter(i => i.productid !== '0m8hjmd721')
+          }
+          return responseJson;
+        });
         this.setState({
           products: responseJson.Items
         });
@@ -42,11 +54,24 @@ export default class Main extends Component {
 
   render() {
 
-    console.log(this.state.products)
+    console.log(this.state)
 
     return (
       <div className="main">
-        {this.createDeals()}
+        {/*{this.createDeals()}*/}
+        <div className="product">
+          <div className="image"></div>
+          <div className="product-name">Brown Jacket</div>
+          <div className="product-brand">Adidas</div>
+          <select>
+            <option disabled selected>Size</option>
+          </select>
+          <div>Description</div>
+        </div>
+
+        <div className="product">
+          <div className="image"></div>
+        </div>
       </div>
     )
   };

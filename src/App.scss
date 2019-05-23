@@ -9,8 +9,30 @@
   width: 100vw;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.product {
+  align-self: center;
+  border: 2px solid black;
+  display: flex;
+  width: 100vw;
+  margin-top: 20px;
+
+  .image {
+    width: 250px;
+    height: 250px;
+    border: 1px solid red;
+  }
+}
+
 .App-logo {
   width: 50vw;
+  height: 12vw;
 }
 
 .main-header {
@@ -27,6 +49,7 @@ header {
   color: white;
   font-weight: bold;
   background-color: #333;
+  margin-bottom: 20px;
 }
 
 footer {
@@ -129,6 +152,9 @@ footer {
 }
 
 @media only screen and (min-width: 1024px) {
+  .product {
+    width: 50vw;
+  }
   .App-logo {
     width: 400px;
     height: 100px;

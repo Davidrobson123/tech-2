@@ -3,11 +3,31 @@
   src: url(./fonts/leighton.ttf);
 }
 
+input, select {
+  text-align: left;
+  margin-top: 10px;
+  padding: 5px 5px 5px 5px;
+  font-size: 14px;
+  border: 2px solid grey;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.featured-bar {
+  margin: 20px;
+  font-size: 40px;
+
+  .product {
+    border: 5px solid black;
+    font-size: 16px;
+  }
+}
+
 .App {
   font-family: Leighton, sans-serif;
   text-align: center;
   width: 100vw;
-  font-weight: bold;
 }
 
 .main {
@@ -21,20 +41,40 @@
   align-self: center;
   border: 2px solid black;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100vw;
   margin-top: 20px;
   text-align: left;
 
+  select {
+    margin: 10px;
+  }
+
   .image {
-    width: 250px;
-    height: 250px;
-    border: 1px solid red;
+    width: 100vw;
+    height: 100vw;
   }
 
   .product-details {
     padding: 10px;
     flex: 2;
+
+    .product-name {
+      font-size: 22px;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .product-brand, .product-description, .product-id {
+      span {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+    }
+
+    div {
+      padding: 10px;
+    }
   }
 }
 
@@ -162,6 +202,12 @@ footer {
 @media only screen and (min-width: 1024px) {
   .product {
     width: 50vw;
+    flex-direction: row;
+
+    .image {
+      width: 250px;
+      height: 250px;
+    }
   }
   .App-logo {
     width: 400px;

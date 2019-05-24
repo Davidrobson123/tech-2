@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../leighton-logo.png';
+import logo from '../../assets/leighton-logo.png';
 import '../../App.scss';
 
 function Header() {

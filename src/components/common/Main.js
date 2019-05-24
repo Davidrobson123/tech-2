@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import '../../App.scss';
+import products from '../../assets/image1.jpg';
+import features from '../../assets/image2.jpg';
 
 export default class Main extends Component {
 
@@ -71,7 +73,7 @@ export default class Main extends Component {
     if(deal['size']['small'] > 0 || deal['size']['medium'] > 0 || deal['size']['large'] > 0 ) {
         return (
             <div className="product">
-              <img className="image" src="" alt="product"/>
+              <img className="image" src={products} alt="product"/>
               <div className="product-details">
                 <div className="product-name">{deal.name}</div>
                 <div className="product-brand"><span>Brand:</span> {deal.brand}</div>
@@ -81,7 +83,8 @@ export default class Main extends Component {
                   {deal['size']['medium'] > 0 ? <option>Medium</option> : null}
                   {deal['size']['large'] > 0 ? <option>Large</option> : null}
                 </select>
-                <div>{deal.description}</div>
+                <div className="product-description"><span>Description:</span><br /> {deal.description}</div>
+                <div className="product-id"><span>Product ID:</span> {deal.productid}</div>
               </div>
             </div>
         );
@@ -92,12 +95,16 @@ export default class Main extends Component {
 
     let featured = this.state.featuredProduct;
 
+    console.log(featured);
+
     return (
       <div className="main">
         <input type="text" id="filter"
-               onChange={this.handleChange}/>
+               onChange={this.handleChange} placeholder="Search..."/>
+        <div className="featured-bar">Featured Product
+
         <div className="product">
-          <img className="image" src="" alt="product"/>
+          <img className="image" src={features} alt="product"/>
           <div className="product-details">
             <div className="product-name">{featured.name}</div>
             <div className="product-brand"><span>Brand:</span> {featured.brand}</div>
@@ -107,10 +114,11 @@ export default class Main extends Component {
               {featured && featured['size']['medium'] > 0 ? <option>Medium</option> : null}
               {featured && featured['size']['large'] > 0 ? <option>Large</option> : null}
             </select>
-            <div className="product-description"><span>Description:</span> {featured.description}</div>
+            <div className="product-description"><span>Description:</span><br /> {featured.description}</div>
+            <div className="product-id"><span>Product ID:</span> {featured.productid}</div>
           </div>
         </div>
-
+        </div>
         {this.createDeals()}
       </div>
     )

@@ -8,11 +8,11 @@ function Header() {
       <div className="main-header"><span>The</span><img src={logo} className="App-logo" alt="logo"/><span> Shop</span></div>
       <div className="menu">
         <div className="topnav" id="myTopnav">
-          <a className="active">Male</a>
-          <a>Female</a>
-          <a>Kids</a>
-          <a>Sale</a>
-          <a>Coming soon</a>
+          <a href="#male" className="active">Male</a>
+          <a href="#female" >Female</a>
+          <a href="#kids" >Kids</a>
+          <a href="#sale">Sale</a>
+          <a href="#soon">Coming soon</a>
         </div>
       </div>
     </header>

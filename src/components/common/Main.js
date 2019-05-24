@@ -67,16 +67,22 @@ export default class Main extends Component {
   }
 
   generateOffer = deal => {
+    console.log(deal);
     if(deal['size']['small'] > 0 || deal['size']['medium'] > 0 || deal['size']['large'] > 0 ) {
         return (
             <div className="product">
-              <div className="image"></div>
-              <div className="product-name">{deal.name}</div>
-              <div className="product-brand">{deal.brand}</div>
-              <select>
-                <option disabled selected>Size</option>
-              </select>
-              <div>Description</div>
+              <img className="image" src="" alt="product"/>
+              <div className="product-details">
+                <div className="product-name">{deal.name}</div>
+                <div className="product-brand"><span>Brand:</span> {deal.brand}</div>
+                <select>
+                  <option disabled selected>Select size</option>
+                  {deal['size']['small'] > 0 ? <option>Small</option> : null}
+                  {deal['size']['medium'] > 0 ? <option>Medium</option> : null}
+                  {deal['size']['large'] > 0 ? <option>Large</option> : null}
+                </select>
+                <div>{deal.description}</div>
+              </div>
             </div>
         );
      }
@@ -90,18 +96,22 @@ export default class Main extends Component {
       <div className="main">
         <input type="text" id="filter"
                onChange={this.handleChange}/>
-        {/*{this.createDeals()}*/}
         <div className="product">
-          <div className="image"></div>
-          <div className="product-name">{featured.name}</div>
-          <div className="product-brand">{featured.brand}</div>
-          <select>
-            <option disabled selected>Size</option>
-          </select>
-          <div>Description</div>
+          <img className="image" src="" alt="product"/>
+          <div className="product-details">
+            <div className="product-name">{featured.name}</div>
+            <div className="product-brand"><span>Brand:</span> {featured.brand}</div>
+            <select>
+              <option disabled selected>Select size</option>
+              {featured && featured['size']['small'] > 0 ? <option>Small</option> : null}
+              {featured && featured['size']['medium'] > 0 ? <option>Medium</option> : null}
+              {featured && featured['size']['large'] > 0 ? <option>Large</option> : null}
+            </select>
+            <div className="product-description"><span>Description:</span> {featured.description}</div>
+          </div>
         </div>
 
-         {this.createDeals()}
+        {this.createDeals()}
       </div>
     )
   };

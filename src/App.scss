@@ -147,10 +147,6 @@ footer {
   padding: 15px;
 }
 
-.menu {
-  margin-top: 40px;
-}
-
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -169,14 +165,23 @@ footer {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 0.2em;
 }
 
 .topnav .icon {
   display: none;
 }
 
+
 @media only screen and (min-width: 1024px) {
+
+  .menu {
+    margin-top: 40px;
+  }
+
+  .topnav a {
+    font-size: 0.3em;
+  }
 
   .product {
     width: 50vw;

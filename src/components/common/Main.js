@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import '../../App.scss';
 import products from '../../assets/image1.jpg';
 import features from '../../assets/image2.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingBasket, faSortDown } from '@fortawesome/free-solid-svg-icons'
 
 export default class Main extends Component {
 
@@ -11,7 +13,8 @@ export default class Main extends Component {
     this.state = {
       products: [],
       featuredProduct: '',
-      filteredProducts: []
+      filteredProducts: [],
+      count: 0
     };
 
     this.createDeals = this.createDeals.bind(this);
@@ -68,6 +71,10 @@ export default class Main extends Component {
       this.filterProducts(e.target.value)
   }
 
+  handleClick = () => {
+    this.setState({ count: this.state.count + 1 })
+  }
+
   generateOffer = deal => {
     console.log(deal);
     if(deal['size']['small'] > 0 || deal['size']['medium'] > 0 || deal['size']['large'] > 0 ) {
@@ -75,6 +82,7 @@ export default class Main extends Component {
             <div className="product">
               <img className="image" src={products} alt="product"/>
               <div className="product-details">
+                <div className="buy" onClick={this.handleClick}>Add to Basket</div>
                 <div className="product-name">{deal.name}</div>
                 <div className="product-brand"><span>Brand:</span> {deal.brand}</div>
                 <select>
@@ -83,6 +91,7 @@ export default class Main extends Component {
                   {deal['size']['medium'] > 0 ? <option>Medium</option> : null}
                   {deal['size']['large'] > 0 ? <option>Large</option> : null}
                 </select>
+                <FontAwesomeIcon icon={faSortDown} className="select-drop"/>
                 <div className="product-description"><span>Description:</span><br /> {deal.description}</div>
                 <div className="product-id"><span>Product ID:</span> {deal.productid}</div>
               </div>
@@ -95,10 +104,9 @@ export default class Main extends Component {
 
     let featured = this.state.featuredProduct;
 
-    console.log(featured);
-
     return (
       <div className="main">
+        <div className="basket"><FontAwesomeIcon icon={faShoppingBasket} /> <span>Basket:</span> {this.state.count}</div>
         <input type="text" id="filter"
                onChange={this.handleChange} placeholder="Search..."/>
         <div className="featured-bar">Featured Product
@@ -106,6 +114,7 @@ export default class Main extends Component {
         <div className="product">
           <img className="image" src={features} alt="product"/>
           <div className="product-details">
+            <div className="buy" onClick={this.handleClick}>Add to Basket</div>
             <div className="product-name">{featured.name}</div>
             <div className="product-brand"><span>Brand:</span> {featured.brand}</div>
             <select>
@@ -114,6 +123,7 @@ export default class Main extends Component {
               {featured && featured['size']['medium'] > 0 ? <option>Medium</option> : null}
               {featured && featured['size']['large'] > 0 ? <option>Large</option> : null}
             </select>
+            <FontAwesomeIcon icon={faSortDown} className="select-drop"/>
             <div className="product-description"><span>Description:</span><br /> {featured.description}</div>
             <div className="product-id"><span>Product ID:</span> {featured.productid}</div>
           </div>

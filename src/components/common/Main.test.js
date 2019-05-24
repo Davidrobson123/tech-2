@@ -29,6 +29,7 @@ describe('ExampleComponent', () => {
 
     process.nextTick(() => { // 6
       expect(wrapper.state()).toEqual({
+        "count": 0,
         "featuredProduct": "",
         "filteredProducts": [],
         "products": []

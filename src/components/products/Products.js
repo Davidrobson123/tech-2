@@ -1,20 +1,17 @@
-import React, {Component} from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../App.scss';
-import ProductItem from "./ProductItem";
+import ProductItem from '../../components/products/ProductItem';
 
-export default class Products extends Component {
+const Products = props => {
 
-  constructor(props) {
-    super(props);
+  const [featuredProduct, setFeaturedProduct] = useState('');
 
-    this.state = {
-      products: [],
-      featuredProduct: '',
-      filteredProducts: [],
-    };
-  }
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  componentDidMount() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+
     let url = "https://27gmrimn45.execute-api.eu-west-2.amazonaws.com/demos/leighton-demo-api?TableName=products";
 
     fetch(url, {
@@ -25,30 +22,26 @@ export default class Products extends Component {
       }
     }).then(response => response.json())
       .then(responseJson => {
-        let me = this;
-        responseJson.Items.map(function(item, i) {
-          if(item.productid === '0m8hjmd721') {
-            me.setState({
-                featuredProduct: item
-            });
+        responseJson.Items.map(function (item, i) {
+          if (item.productid === '0m8hjmd721') {
+            setFeaturedProduct(item);
 
             responseJson.Items = responseJson.Items.filter(i => i.productid !== '0m8hjmd721')
           }
           return responseJson;
         });
-        this.setState({
-          products: responseJson.Items,
-          filteredProducts: responseJson.Items
-        });
-      });
-  }
 
-  render() {
+        setProducts(responseJson.Items);
+        setFilteredProducts(responseJson.Items);
+      })
+      .catch((err) => {console.log(err)});
+  }, []);
 
-    return (
-      <div className="main">
-        <ProductItem products={this.state.products} filteredProducts={this.state.filteredProducts} featured={this.state.featuredProduct}/>
-      </div>
-    )
-  };
+  return (
+    <div className="main">
+      <ProductItem products={products} filteredProducts={filteredProducts} featured={featuredProduct}/>
+    </div>
+  )
 }
+
+export default Products;

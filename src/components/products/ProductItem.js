@@ -36,8 +36,7 @@ const ProductItem = props => {
   }
 
   const generateOffer = deal => {
-    console.log(deal)
-    if(deal['size']['small'] > 0 || deal['size']['medium'] > 0 || deal['size']['large'] > 0 ) {
+    if(deal['sizes']['small'] > 0 || deal['sizes']['medium'] > 0 || deal['sizes']['large'] > 0 ) {
         return (
             <div className="product">
               <img className="image" src={products} alt="product"/>
@@ -47,9 +46,9 @@ const ProductItem = props => {
                 <div className="product-brand"><span>Brand:</span> {deal.brand}</div>
                 <select>
                   <option disabled selected>Select size</option>
-                  {deal['size']['small'] > 0 ? <option>Small</option> : null}
-                  {deal['size']['medium'] > 0 ? <option>Medium</option> : null}
-                  {deal['size']['large'] > 0 ? <option>Large</option> : null}
+                  {deal['sizes']['small'] > 0 ? <option>Small</option> : null}
+                  {deal['sizes']['medium'] > 0 ? <option>Medium</option> : null}
+                  {deal['sizes']['large'] > 0 ? <option>Large</option> : null}
                 </select>
                 <FontAwesomeIcon icon={faSortDown} className="select-drop"/>
                 <div className="product-description"><span>Description:</span><br /> {deal.description}</div>
@@ -77,9 +76,9 @@ const ProductItem = props => {
           <div className="product-brand"><span>Brand:</span> {featured.brand}</div>
           <select>
             <option disabled selected>Select size</option>
-            {featured && featured['size']['small'] > 0 ? <option>Small</option> : null}
-            {featured && featured['size']['medium'] > 0 ? <option>Medium</option> : null}
-            {featured && featured['size']['large'] > 0 ? <option>Large</option> : null}
+            {featured && featured['sizes']['small'] > 0 ? <option>Small</option> : null}
+            {featured && featured['sizes']['medium'] > 0 ? <option>Medium</option> : null}
+            {featured && featured['sizes']['large'] > 0 ? <option>Large</option> : null}
           </select>
           <FontAwesomeIcon icon={faSortDown} className="select-drop"/>
           <div className="product-description"><span>Description:</span><br /> {featured.description}</div>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import '../../App.scss';
 import ProductItem from '../../components/products/ProductItem';
+let data = require('../../assets/mock-data/data.json');
 
 const Products = props => {
 
-  const [featuredProduct, setFeaturedProduct] = useState('');
+  const [featuredProduct, setFeaturedProducts] = useState('');
 
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -12,30 +13,22 @@ const Products = props => {
 
   useEffect(() => {
 
-    let url = "https://27gmrimn45.execute-api.eu-west-2.amazonaws.com/demos/leighton-demo-api?TableName=products";
+    let filtered = '';
 
-    fetch(url, {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        'x-api-key': 'zQo4PPqD862IwDIQRZub8gX4dqjA3aW2DDhI6UF4'
+    data.Items.map(function (item, i) {
+      if (item.productid === '0m8hjmd721') {
+        filtered = item;
+        data.Items = data.Items.filter(i => i.productid !== '0m8hjmd721')
       }
-    }).then(response => response.json())
-      .then(responseJson => {
-        responseJson.Items.map(function (item, i) {
-          if (item.productid === '0m8hjmd721') {
-            setFeaturedProduct(item);
+      return data;
+    });
 
-            responseJson.Items = responseJson.Items.filter(i => i.productid !== '0m8hjmd721')
-          }
-          return responseJson;
-        });
-
-        setProducts(responseJson.Items);
-        setFilteredProducts(responseJson.Items);
-      })
-      .catch((err) => {console.log(err)});
+    setFeaturedProducts(filtered);
+    setFilteredProducts(data.Items);
+    setProducts(data.Items);
   }, []);
+
+
 
   return (
     <div className="main">
